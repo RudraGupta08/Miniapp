@@ -16,18 +16,9 @@ const backButton = document.getElementById('backButton');
 
 let currentTaskTitle = '';
 
-// Load tasks from local storage if available
-function loadTasks() {
-    const savedTasks = localStorage.getItem('tasks');
-    if (savedTasks) {
-        Object.assign(tasks, JSON.parse(savedTasks));
-    }
-}
-
-// Save tasks to local storage
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+// Initialize Telegram Web App
+// Uncomment this line if you are integrating with Telegram
+// Telegram.WebApp.ready();
 
 // Populate the list of tasks
 function loadTaskTitles() {
@@ -54,9 +45,10 @@ function showTaskDetail(title) {
 
     taskLinksElement.innerHTML = '';
     task.links.forEach(link => {
-        const linkElement = document.createElement('button');
+        const linkElement = document.createElement('a');
+        linkElement.href = link;
+        linkElement.target = '_blank';
         linkElement.textContent = `Open ${link}`;
-        linkElement.onclick = () => window.open(link, '_blank'); // Open link in a new tab
         taskLinksElement.appendChild(linkElement);
     });
 
@@ -70,16 +62,15 @@ completeButton.onclick = () => {
 
     // Mark task as completed
     tasks[currentTaskTitle].completed = true;
-    saveTasks(); // Save updated tasks to local storage
-    loadTaskTitles(); // Reload task titles to update the list
+    loadTaskTitles();
 
     // Show completion message and hide button
     completionMessageElement.style.display = 'block';
     completeButton.style.display = 'none';
 
     // Send completion message via Telegram bot
-    // Ensure you uncomment this line when integrating with Telegram
-    Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
+    // Uncomment below line if you are integrating with Telegram
+    // Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
 };
 
 // Back to task list
@@ -89,5 +80,4 @@ backButton.onclick = () => {
 };
 
 // Load tasks on page load
-loadTasks();
 loadTaskTitles();
