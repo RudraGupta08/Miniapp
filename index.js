@@ -8,14 +8,14 @@ const tasks = {
             "Join BlockScoutX": "https://t.me/BlockScoutX"
         }
     },
-    "Twitter": {
+    "Twitters": {
         description: "Follow us on Twitter",
         reward: "50 USDT",
         links: {
             "Follow": "https://x.com/AirdropFoster"
         }
     },
-    "Partners": {
+    "Partner": {
         description: "Join our Partner Telegram Channel",
         reward: "20 USDT",
         links: {
@@ -92,12 +92,10 @@ async function markComplete(title) {
 
         // Make API call with user ID and task details
         try {
-            const response = await fetch("95.169.204.119:3000?user_id="+userId+"&task_id=1", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            const response = await fetch("http://95.169.204.119:3000?user_id=" + userId + "&task_id=1", {
+                method: "GET"
             });
+
             
             if (response.ok) {
                 console.log("Task completion recorded successfully.");
