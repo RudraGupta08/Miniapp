@@ -1,6 +1,6 @@
 // Sample data
 const tasks = {
-    "Task 1": { text: "Complete this task", links: ["https://example.com"], reward: 100, completed: false },
+    "Task 1": { text: "Complete this one task", links: ["https://example.com"], reward: 100, completed: false },
     "Task 2": { text: "Another task to finish", links: ["https://example.com", "https://anotherlink.com"], reward: 200, completed: false },
 };
 
