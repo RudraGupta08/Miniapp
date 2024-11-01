@@ -15,14 +15,6 @@ const tasks = {
             "Learn More": "https://example.com/link3"
         }
     },
-    {
-     "Twitter":{
-         description:"Follow us on Twitter",
-         reward :"50 USDT",
-         links:{
-             "Follow Now":"x.com/AirdropFoster"
-         }
-     }
     // Add more tasks as needed
 };
 
