@@ -1,83 +1,61 @@
-// Sample data
+// Sample task dictionary
 const tasks = {
-    "Task 1": { text: "Complete this one task", links: ["https://example.com"], reward: 100, completed: false },
-    "Task 2": { text: "Another task to finish", links: ["https://example.com", "https://anotherlink.com"], reward: 200, completed: false },
+    "Task 1": {
+        description: "Description for Task 1",
+        reward: "Reward for completing Task 1",
+        links: ["https://example.com/link1", "https://example.com/link2"]
+    },
+    "Task 2": {
+        description: "Description for Task 2",
+        reward: "Reward for completing Task 2",
+        links: ["https://example.com/link3"]
+    },
+    // Add more tasks as needed
 };
 
-const taskTitlesElement = document.getElementById('taskTitles');
-const taskListSection = document.getElementById('taskList');
-const taskDetailSection = document.getElementById('taskDetail');
-const taskTitleElement = document.getElementById('taskTitle');
-const taskTextElement = document.getElementById('taskText');
-const taskLinksElement = document.getElementById('taskLinks');
-const completionMessageElement = document.getElementById('completionMessage');
-const completeButton = document.getElementById('completeButton');
-const backButton = document.getElementById('backButton');
+// Load completed tasks from local storage
+let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-let currentTaskTitle = '';
+// Render the task titles on page load
+function renderTasks() {
+    const allTasks = document.getElementById("all-tasks");
+    allTasks.innerHTML = "";
 
-// Initialize Telegram Web App
-// Uncomment this line if you are integrating with Telegram
-//Telegram.WebApp.ready();
-
-// Populate the list of tasks
-function loadTaskTitles() {
-    taskTitlesElement.innerHTML = '';
-    for (const [title, task] of Object.entries(tasks)) {
-        const li = document.createElement('li');
-        li.textContent = title;
-        li.className = task.completed ? 'completed' : '';
-        li.onclick = () => showTaskDetail(title);
-        taskTitlesElement.appendChild(li);
+    for (const title in tasks) {
+        const taskItem = document.createElement("li");
+        taskItem.classList.add("task-item");
+        taskItem.innerHTML = `
+            <p>${title}</p>
+            <button onclick="showDetails('${title}')">View Details</button>
+            <button onclick="markComplete('${title}')">${completedTasks.includes(title) ? "Completed" : "Complete"}</button>
+        `;
+        allTasks.appendChild(taskItem);
     }
 }
 
 // Show task details
-function showTaskDetail(title) {
-    currentTaskTitle = title;
+function showDetails(title) {
     const task = tasks[title];
-
-    taskListSection.style.display = 'none';
-    taskDetailSection.style.display = 'block';
-
-    taskTitleElement.textContent = title;
-    taskTextElement.textContent = task.text;
-
-    taskLinksElement.innerHTML = '';
-    task.links.forEach(link => {
-        const linkElement = document.createElement('a');
-        linkElement.href = link;
-        linkElement.target = '_blank';
-        linkElement.textContent = `Open ${link}`;
-        taskLinksElement.appendChild(linkElement);
-    });
-
-    completionMessageElement.style.display = task.completed ? 'block' : 'none';
-    completeButton.style.display = task.completed ? 'none' : 'block';
+    const details = `
+        <h3>${title}</h3>
+        <p>${task.description}</p>
+        <p>Reward: ${task.reward}</p>
+        <p>Links:</p>
+        <ul>
+            ${task.links.map(link => `<li><a href="${link}" target="_blank">${link}</a></li>`).join('')}
+        </ul>
+    `;
+    document.getElementById("all-tasks").innerHTML = details + `<button onclick="renderTasks()">Back</button>`;
 }
 
-// Handle task completion
-completeButton.onclick = () => {
-    if (tasks[currentTaskTitle].completed) return;
+// Mark a task as complete
+function markComplete(title) {
+    if (!completedTasks.includes(title)) {
+        completedTasks.push(title);
+        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+    }
+    renderTasks();
+}
 
-    // Mark task as completed
-    tasks[currentTaskTitle].completed = true;
-    loadTaskTitles();
-
-    // Show completion message and hide button
-    completionMessageElement.style.display = 'block';
-    completeButton.style.display = 'none';
-
-    // Send completion message via Telegram bot
-    // Uncomment below line if you are integrating with Telegram
-    Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
-};
-
-// Back to task list
-backButton.onclick = () => {
-    taskListSection.style.display = 'block';
-    taskDetailSection.style.display = 'none';
-};
-
-// Load tasks on page load
-loadTaskTitles();
+// Initial rendering of tasks
+renderTasks();
