@@ -15,7 +15,7 @@ const tasks = {
             "Follow": "https://x.com/AirdropFoster"
         }
     },
-    "Partner": {
+    "Partners": {
         description: "Join our Partner Telegram Channel",
         reward: "20 USDT",
         links: {
@@ -80,11 +80,38 @@ function openLink(link) {
     window.open(link, "_blank");
 }
 
-// Mark a task as complete
-function markComplete(title) {
+// Initialize Telegram WebApp
+window.Telegram.WebApp.ready();
+const userId = Telegram.WebApp.initDataUnsafe.user?.id || "Unknown User";
+
+// Function to call API when marking task complete
+async function markComplete(title) {
     if (!completedTasks.includes(title)) {
         completedTasks.push(title);
         localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+        // Make API call with user ID and task details
+        try {
+            const response = await fetch("YOUR_API_ENDPOINT", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    taskTitle: title,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            
+            if (response.ok) {
+                console.log("Task completion recorded successfully.");
+            } else {
+                console.error("Failed to record task completion.");
+            }
+        } catch (error) {
+            console.error("Error making API call:", error);
+        }
     }
     renderTasks();
 }
