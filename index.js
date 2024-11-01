@@ -1,18 +1,25 @@
 // Sample task dictionary
 const tasks = {
-    "Tg 1": {
-        description: "Description for Task 1",
-        reward: "Reward for completing Task 1",
+    "Telegram": {
+        description: "Join Our Telegram Channels",
+        reward: "100 USDT",
         links: {
-            "Join Link": "https://example.com/link1",
-            "Another Link": "https://example.com/link2"
+            "Join": "https://t.me/AirdropDominator",
+            "Join": "https://t.me/BlockScoutX"
         }
     },
-    "Task 2": {
-        description: "Description for Task 2",
-        reward: "Reward for completing Task 2",
+    "Twitter": {
+        description: "Follow us on Twitter",
+        reward: "50 USDT",
         links: {
-            "Learn More": "https://example.com/link3"
+            "Follow": "https://x.com/AirdropFoster"
+        }
+    },
+    "Partner": {
+        description: "Join our Partner Telegram Channel",
+        reward: "20 USDT",
+        links: {
+            "Join": "https://t.me/Pulseannouncements"
         }
     },
     // Add more tasks as needed
