@@ -4,7 +4,6 @@ const tasks = {
     "Task 2": { text: "Another task to finish", links: ["https://example.com", "https://anotherlink.com"], reward: 200, completed: false },
 };
 
-// Get elements
 const taskTitlesElement = document.getElementById('taskTitles');
 const taskListSection = document.getElementById('taskList');
 const taskDetailSection = document.getElementById('taskDetail');
@@ -17,22 +16,26 @@ const backButton = document.getElementById('backButton');
 
 let currentTaskTitle = '';
 
-// Load completed tasks from localStorage
-let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+// Load tasks from local storage if available
+function loadTasks() {
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+        Object.assign(tasks, JSON.parse(savedTasks));
+    }
+}
 
-// Initialize Telegram Web App
-Telegram.WebApp.ready();
+// Save tasks to local storage
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 // Populate the list of tasks
 function loadTaskTitles() {
-    taskTitlesElement.innerHTML = ''; // Clear the current list
+    taskTitlesElement.innerHTML = '';
     for (const [title, task] of Object.entries(tasks)) {
-        // Check if task is completed
-        task.completed = completedTasks.includes(title);
-        
         const li = document.createElement('li');
         li.textContent = title;
-        li.className = task.completed ? 'completed' : ''; // Add class if completed
+        li.className = task.completed ? 'completed' : '';
         li.onclick = () => showTaskDetail(title);
         taskTitlesElement.appendChild(li);
     }
@@ -53,7 +56,7 @@ function showTaskDetail(title) {
     task.links.forEach(link => {
         const linkElement = document.createElement('button');
         linkElement.textContent = `Open ${link}`;
-        linkElement.onclick = () => window.open(link, '_blank');
+        linkElement.onclick = () => window.open(link, '_blank'); // Open link in a new tab
         taskLinksElement.appendChild(linkElement);
     });
 
@@ -63,27 +66,20 @@ function showTaskDetail(title) {
 
 // Handle task completion
 completeButton.onclick = () => {
-    if (tasks[currentTaskTitle].completed) return; // Prevent marking already completed tasks
+    if (tasks[currentTaskTitle].completed) return;
 
     // Mark task as completed
     tasks[currentTaskTitle].completed = true;
-    completedTasks.push(currentTaskTitle);
-    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-    loadTaskTitles(); // Refresh the task list
+    saveTasks(); // Save updated tasks to local storage
+    loadTaskTitles(); // Reload task titles to update the list
 
     // Show completion message and hide button
     completionMessageElement.style.display = 'block';
     completeButton.style.display = 'none';
 
-    // Prepare the message to send to the Telegram bot
-    const completionMessage = `Task "${currentTaskTitle}" completed +${tasks[currentTaskTitle].reward} reward`;
-
     // Send completion message via Telegram bot
-    Telegram.WebApp.sendData(JSON.stringify({
-        taskTitle: currentTaskTitle,
-        message: completionMessage,
-        reward: tasks[currentTaskTitle].reward
-    }));
+    // Ensure you uncomment this line when integrating with Telegram
+    Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
 };
 
 // Back to task list
@@ -93,4 +89,5 @@ backButton.onclick = () => {
 };
 
 // Load tasks on page load
+loadTasks();
 loadTaskTitles();
