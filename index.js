@@ -1,6 +1,6 @@
 // Sample task dictionary
 const tasks = {
-    "Task 1": {
+    "Tg 1": {
         description: "Description for Task 1",
         reward: "Reward for completing Task 1",
         links: {
