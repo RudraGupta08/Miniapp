@@ -119,6 +119,6 @@ async function markComplete(title) {
     }
     renderTasks();
 }
-
+sendLogToTelegram('running')
 // Initial rendering of tasks
 renderTasks();
