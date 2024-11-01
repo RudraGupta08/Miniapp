@@ -17,7 +17,8 @@ const backButton = document.getElementById('backButton');
 let currentTaskTitle = '';
 
 // Initialize Telegram Web App
-Telegram.WebApp.ready();
+// Uncomment this line if you are integrating with Telegram
+// Telegram.WebApp.ready();
 
 // Populate the list of tasks
 function loadTaskTitles() {
@@ -68,7 +69,8 @@ completeButton.onclick = () => {
     completeButton.style.display = 'none';
 
     // Send completion message via Telegram bot
-    Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
+    // Uncomment below line if you are integrating with Telegram
+    // Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
 };
 
 // Back to task list
