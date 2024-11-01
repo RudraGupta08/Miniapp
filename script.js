@@ -25,12 +25,14 @@ Telegram.WebApp.ready();
 
 // Populate the list of tasks
 function loadTaskTitles() {
-    taskTitlesElement.innerHTML = '';
+    taskTitlesElement.innerHTML = ''; // Clear the current list
     for (const [title, task] of Object.entries(tasks)) {
-        task.completed = completedTasks.includes(title); // Check if task is completed
+        // Check if task is completed
+        task.completed = completedTasks.includes(title);
+        
         const li = document.createElement('li');
         li.textContent = title;
-        li.className = task.completed ? 'completed' : '';
+        li.className = task.completed ? 'completed' : ''; // Add class if completed
         li.onclick = () => showTaskDetail(title);
         taskTitlesElement.appendChild(li);
     }
@@ -61,13 +63,13 @@ function showTaskDetail(title) {
 
 // Handle task completion
 completeButton.onclick = () => {
-    if (tasks[currentTaskTitle].completed) return;
+    if (tasks[currentTaskTitle].completed) return; // Prevent marking already completed tasks
 
     // Mark task as completed
     tasks[currentTaskTitle].completed = true;
     completedTasks.push(currentTaskTitle);
     localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-    loadTaskTitles();
+    loadTaskTitles(); // Refresh the task list
 
     // Show completion message and hide button
     completionMessageElement.style.display = 'block';
