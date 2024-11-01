@@ -3,17 +3,12 @@ const tasks = {
     "Task 4": {
         description: "Description for Task 1",
         reward: "Reward for completing Task 1",
-        links: {
-            "Join Link": "https://example.com/link1",
-            "Another Link": "https://example.com/link2"
-        }
+        links: ["https://example.com/link1", "https://example.com/link2"]
     },
     "Task 2": {
         description: "Description for Task 2",
         reward: "Reward for completing Task 2",
-        links: {
-            "Learn More": "https://example.com/link3"
-        }
+        links: ["https://example.com/link3"]
     },
     // Add more tasks as needed
 };
@@ -24,7 +19,7 @@ let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 // Render the task titles on page load
 function renderTasks() {
     const allTasks = document.getElementById("all-tasks");
-    allTasks.innerHTML = "";  // Clear previous content
+    allTasks.innerHTML = "";
 
     for (const title in tasks) {
         const taskItem = document.createElement("li");
@@ -50,18 +45,14 @@ function renderTasks() {
 // Show task details
 function showDetails(title) {
     const task = tasks[title];
-    const linksHtml = Object.entries(task.links).map(([buttonName, link]) => `
-        <li>
-            <button class="btn join-btn" onclick="openLink('${link}')">${buttonName}</button>
-        </li>
-    `).join('');
-
     const details = `
         <h3>${title}</h3>
         <p>${task.description}</p>
         <p>Reward: ${task.reward}</p>
         <p>Links:</p>
-        <ul>${linksHtml}</ul>
+        <ul>
+            ${task.links.map(link => `<li><button class="btn join-btn" onclick="openLink('${link}')">Join</button></li>`).join('')}
+        </ul>
         <button class="btn complete-btn" onclick="markComplete('${title}')">Complete</button>
         <button class="btn back-btn" onclick="renderTasks()">Back</button>
     `;
@@ -83,6 +74,4 @@ function markComplete(title) {
 }
 
 // Initial rendering of tasks
-document.addEventListener("DOMContentLoaded", () => {
-    renderTasks();
-});
+renderTasks();
