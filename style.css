@@ -93,26 +93,30 @@ header h1 {
 }
 
 /* buttons styling */
-.btn {
+.btn{
     cursor: pointer;
     user-select: none;
     border: none;
     outline: none;
     text-align: center;
     border-radius: 0.5rem;
-    height: 2.5rem;
-    min-height: 2.5rem;
+    height: 3rem;
+    min-height: 3rem;
     text-transform: uppercase;
-    border-width: 1px;
-    padding: 0 1rem;
-    font-size: 1rem;
+    border-width:1px;
+    animation: button-pop var(--animation-btn,.25s)ease-in-out;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: .875rem;
     font-weight: 600;
     line-height: 1em;
-    text-decoration: none;
-    transition: 0.3s all ease;
+    text-decoration-line: none;
+    transition: .2s all cubic-bezier(.4,0,.2,1);
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .view-btn {
