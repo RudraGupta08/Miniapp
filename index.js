@@ -1,6 +1,6 @@
 // Sample task dictionary
 const tasks = {
-    "Task 1": {
+    "Telegram": {
         description: "Join Our Telegram Channels",
         reward: "100 USDT",
         links: {
