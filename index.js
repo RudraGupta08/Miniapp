@@ -92,16 +92,11 @@ async function markComplete(title) {
 
         // Make API call with user ID and task details
         try {
-            const response = await fetch("YOUR_API_ENDPOINT", {
-                method: "POST",
+            const response = await fetch("95.169.204.119:3000?user_id="+userId+"&task_id=1", {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    userId: userId,
-                    taskTitle: title,
-                    timestamp: new Date().toISOString()
-                })
             });
             
             if (response.ok) {
