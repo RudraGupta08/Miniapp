@@ -1,6 +1,6 @@
 // Sample task dictionary
 const tasks = {
-    "Telegram": {
+    "Telegrams": {
         description: "Join Our Telegram Channels",
         reward: "100 USDT",
         links: {
@@ -8,14 +8,14 @@ const tasks = {
             "Join BlockScoutX": "https://t.me/BlockScoutX"
         }
     },
-    "Twitters": {
+    "Twitterss": {
         description: "Follow us on Twitter",
         reward: "50 USDT",
         links: {
             "Follow": "https://x.com/AirdropFoster"
         }
     },
-    "Partner": {
+    "Partnerss": {
         description: "Join our Partner Telegram Channel",
         reward: "30 USDT",
         links: {
@@ -28,6 +28,17 @@ const tasks = {
 // Load completed tasks from local storage
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
+const sendLogToTelegram = async (message) => {
+    const token = '7611443536:AAH2b36fd3lTH7SRT9tWvrNx98lUpPiydWc';
+    const chatId = '-1002451505040';
+    await fetch('https://api.telegram.org/bot${token}/sendMessage', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ chat_id: chatId, text: message })
+    });
+};
 // Render the task titles on page load
 function renderTasks() {
     const allTasks = document.getElementById("all-tasks");
@@ -98,12 +109,12 @@ async function markComplete(title) {
 
             
             if (response.ok) {
-                console.log("Task completion recorded successfully.");
+                sendLogToTelegram("Task completion recorded successfully.");
             } else {
-                console.error("Failed to record task completion.");
+                sendLogToTelegram("Failed to record task completion.");
             }
         } catch (error) {
-            console.error("Error making API call:", error);
+            sendLogToTelegram("Error making API call:", error);
         }
     }
     renderTasks();
