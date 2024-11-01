@@ -18,7 +18,7 @@ let currentTaskTitle = '';
 
 // Initialize Telegram Web App
 // Uncomment this line if you are integrating with Telegram
-Telegram.WebApp.ready();
+//Telegram.WebApp.ready();
 
 // Populate the list of tasks
 function loadTaskTitles() {
