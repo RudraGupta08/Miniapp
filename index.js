@@ -1,11 +1,11 @@
 // Sample task dictionary
 const tasks = {
-    "Task 4": {
+    "Telegram": {
         description: "Description for Task 1",
         reward: "Reward for completing Task 1",
         links: ["https://example.com/link1", "https://example.com/link2"]
     },
-    "Task 2": {
+    "Twitter": {
         description: "Description for Task 2",
         reward: "Reward for completing Task 2",
         links: ["https://example.com/link3"]
