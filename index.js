@@ -4,8 +4,8 @@ const tasks = {
         description: "Join Our Telegram Channels",
         reward: "100 USDT",
         links: {
-            "Join": "https://t.me/AirdropDominator",
-            "Join": "https://t.me/BlockScoutX"
+            "Join Domiantor": "https://t.me/AirdropDominator",
+            "Join BlockScoutX": "https://t.me/BlockScoutX"
         }
     },
     "Twitter": {
