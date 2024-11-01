@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="bumblebee">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task List</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="to do.png">
+    <title>Task List</title>
 </head>
-<body>
-    <div id="app">
-        <!-- Task List Section -->
-        <section id="taskList">
-            <h1>Available Tasks</h1>
-            <ul id="taskTitles"></ul>
-        </section>
 
-        <!-- Task Detail Section -->
-        <section id="taskDetail" style="display: none;">
-            <button id="backButton">&larr; Back to Tasks</button>
-            <h2 id="taskTitle"></h2>
-            <p id="taskText"></p>
-            <div id="taskLinks"></div>
-            <button id="completeButton">Mark as Completed</button>
-            <p id="completionMessage" style="color: green; display: none;">Task completed!</p>
-        </section>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task List</h1>
+        </header>
+
+        <ul id="all-tasks" class="tasks-list"></ul>
     </div>
 
-    <script src="script.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>
