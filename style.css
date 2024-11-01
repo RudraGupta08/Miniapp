@@ -54,9 +54,17 @@ button:hover {
     background-color: #45a049;
 }
 
-#taskLinks a {
+#taskLinks button {
     display: block;
     color: #0066cc;
     text-decoration: none;
     margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #0066cc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#taskLinks button:hover {
+    background-color: #f0f0f0;
 }
