@@ -1,8 +1,8 @@
 // Sample task dictionary
 const tasks = {
-    "Telegram": {
-        description: "Join Our Telegram Channels",
-        reward: "100 USDT",
+    "Task 4": {
+        description: "Description for Task 1",
+        reward: "Reward for completing Task 1",
         links: {
             "Join Link": "https://example.com/link1",
             "Another Link": "https://example.com/link2"
@@ -24,7 +24,7 @@ let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 // Render the task titles on page load
 function renderTasks() {
     const allTasks = document.getElementById("all-tasks");
-    allTasks.innerHTML = "";
+    allTasks.innerHTML = "";  // Clear previous content
 
     for (const title in tasks) {
         const taskItem = document.createElement("li");
@@ -83,4 +83,6 @@ function markComplete(title) {
 }
 
 // Initial rendering of tasks
-renderTasks();
+document.addEventListener("DOMContentLoaded", () => {
+    renderTasks();
+});
