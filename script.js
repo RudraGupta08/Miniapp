@@ -18,7 +18,7 @@ let currentTaskTitle = '';
 
 // Initialize Telegram Web App
 // Uncomment this line if you are integrating with Telegram
-// Telegram.WebApp.ready();
+Telegram.WebApp.ready();
 
 // Populate the list of tasks
 function loadTaskTitles() {
@@ -70,7 +70,7 @@ completeButton.onclick = () => {
 
     // Send completion message via Telegram bot
     // Uncomment below line if you are integrating with Telegram
-    // Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
+    Telegram.WebApp.sendData(JSON.stringify({ taskTitle: currentTaskTitle, message: 'Task completed', reward: tasks[currentTaskTitle].reward }));
 };
 
 // Back to task list
