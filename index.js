@@ -24,10 +24,20 @@ function renderTasks() {
     for (const title in tasks) {
         const taskItem = document.createElement("li");
         taskItem.classList.add("task-item");
-        taskItem.innerHTML = `
-            <p>${title}</p>
-            <button class="btn view-btn" onclick="showDetails('${title}')">View</button>
-        `;
+
+        // Check if the task is completed
+        if (completedTasks.includes(title)) {
+            taskItem.innerHTML = `
+                <p><strike>${title}</strike></p>
+                <button class="btn complete-btn" disabled>Completed</button>
+            `;
+        } else {
+            taskItem.innerHTML = `
+                <p>${title}</p>
+                <button class="btn view-btn" onclick="showDetails('${title}')">View</button>
+            `;
+        }
+
         allTasks.appendChild(taskItem);
     }
 }
@@ -44,8 +54,9 @@ function showDetails(title) {
             ${task.links.map(link => `<li><button class="btn join-btn" onclick="openLink('${link}')">Join</button></li>`).join('')}
         </ul>
         <button class="btn complete-btn" onclick="markComplete('${title}')">Complete</button>
+        <button class="btn back-btn" onclick="renderTasks()">Back</button>
     `;
-    document.getElementById("all-tasks").innerHTML = details + `<button class="btn back-btn" onclick="renderTasks()">Back</button>`;
+    document.getElementById("all-tasks").innerHTML = details;
 }
 
 // Open link in a new tab
