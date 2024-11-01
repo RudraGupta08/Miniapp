@@ -26,8 +26,7 @@ function renderTasks() {
         taskItem.classList.add("task-item");
         taskItem.innerHTML = `
             <p>${title}</p>
-            <button onclick="showDetails('${title}')">View Details</button>
-            <button onclick="markComplete('${title}')">${completedTasks.includes(title) ? "Completed" : "Complete"}</button>
+            <button class="btn view-btn" onclick="showDetails('${title}')">View</button>
         `;
         allTasks.appendChild(taskItem);
     }
@@ -42,10 +41,16 @@ function showDetails(title) {
         <p>Reward: ${task.reward}</p>
         <p>Links:</p>
         <ul>
-            ${task.links.map(link => `<li><a href="${link}" target="_blank">${link}</a></li>`).join('')}
+            ${task.links.map(link => `<li><button class="btn join-btn" onclick="openLink('${link}')">Join</button></li>`).join('')}
         </ul>
+        <button class="btn complete-btn" onclick="markComplete('${title}')">Complete</button>
     `;
-    document.getElementById("all-tasks").innerHTML = details + `<button onclick="renderTasks()">Back</button>`;
+    document.getElementById("all-tasks").innerHTML = details + `<button class="btn back-btn" onclick="renderTasks()">Back</button>`;
+}
+
+// Open link in a new tab
+function openLink(link) {
+    window.open(link, "_blank");
 }
 
 // Mark a task as complete
