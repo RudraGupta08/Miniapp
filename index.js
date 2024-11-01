@@ -17,7 +17,7 @@ const tasks = {
     },
     "Partner": {
         description: "Join our Partner Telegram Channel",
-        reward: "20 USDT",
+        reward: "30 USDT",
         links: {
             "Join": "https://t.me/Pulseannouncements"
         }
