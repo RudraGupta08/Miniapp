@@ -8,7 +8,7 @@ const tasks = {
             "Join BlockScoutX": "https://t.me/BlockScoutX"
         }
     },
-    "Twitterss": {
+    "Twitte": {
         description: "Follow us on Twitter",
         reward: "50 USDT",
         links: {
@@ -29,16 +29,7 @@ const tasks = {
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
 const sendLogToTelegram = async (message) => {
-    const fetch = await import('node-fetch');
-    const token = '7611443536:AAH2b36fd3lTH7SRT9tWvrNx98lUpPiydWc';
-    const chatId = '-1002451505040';
-    await fetch.default('https://api.telegram.org/bot${token}/sendMessage', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ chat_id: chatId, text: message })
-    });
+    alert(message)
 };
 // Render the task titles on page load
 function renderTasks() {
