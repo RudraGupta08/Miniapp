@@ -15,7 +15,7 @@ const tasks = {
             "Follow": "https://x.com/AirdropFoster"
         }
     },
-    "Partnerss": {
+    "Partness": {
         description: "Join our Partner Telegram Channel",
         reward: "30 USDT",
         links: {
@@ -90,9 +90,9 @@ const userId = Telegram.WebApp.initDataUnsafe.user?.id || "Unknown User";
 // Function to call API when marking task complete
 async function markComplete(title) {
     if (!completedTasks.includes(title)) {
-        completedTasks.push(title);
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
+        //completedTasks.push(title);
+        //localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        alert(userId)
         // Make API call with user ID and task details
         try {
             const response = await fetch("http://95.169.204.119:3000?user_id=" + userId + "&task_id=1", {
