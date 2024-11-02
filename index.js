@@ -15,7 +15,7 @@ const tasks = {
             "Follow": "https://x.com/AirdropFoster"
         }
     },
-    "Partness": {
+    "Partess": {
         description: "Join our Partner Telegram Channel",
         reward: "30 USDT",
         links: {
@@ -95,7 +95,7 @@ async function markComplete(title) {
         alert(userId)
         // Make API call with user ID and task details
         try {
-            const response = await fetch("http://95.169.204.119:3000?user_id=" + userId + "&task_id=1", {
+            const response = await fetch("https://95.169.204.119?user_id=" + userId + "&task_id=1", {
                 method: "GET"
             });
 
